@@ -1,0 +1,33 @@
+FUNCTION ZDAK_TOP_EGITIM.
+*"----------------------------------------------------------------------
+*"*"Local Interface:
+*"  IMPORTING
+*"     REFERENCE(IV_SAYI1) TYPE  I OPTIONAL
+*"     REFERENCE(IV_ISLEM) TYPE  CHAR1 OPTIONAL
+*"     REFERENCE(IV_SAYI2) TYPE  I
+*"  EXPORTING
+*"     REFERENCE(EV_SONUC) TYPE  P
+*"  EXCEPTIONS
+*"      SIFIRLA_BOLME_HATASI
+*"      GECERSIZ_ISLEM
+*"----------------------------------------------------------------------
+
+CASE iv_islem.
+  WHEN '+'.
+    ev_sonuc = iv_sayi1 + iv_sayi2.
+  WHEN '-'.
+    ev_sonuc = iv_sayi1 - iv_sayi2.
+ 	WHEN '*'.
+    ev_sonuc = iv_sayi1 * iv_sayi2.
+ 	WHEN '/'.
+    if iv_sayi2 = 0.
+      RAISE sifirla_bolme_hatasi.
+      ENDIF.
+    ev_sonuc = iv_sayi1 / iv_sayi2.
+  WHEN OTHERS.
+     RAISE gecersiz_islem.
+ENDCASE.
+
+
+
+ENDFUNCTION.
